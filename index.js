@@ -2,15 +2,19 @@
 for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
     document.querySelectorAll("button")[i].addEventListener("click", function () {
         var innerHtmlElement = this.innerHTML;
+
         makeSound(innerHtmlElement);
+        buttonAnimation(innerHtmlElement);
     });
 }
 
 document.addEventListener("keydown", function (e) {
     // e is the event that triggered the function sort of a call back
     makeSound(e.key);
+    buttonAnimation(e.key);
 });
 
+// Function that creates sound objects with different drum sounds
 function makeSound(key) {
     switch (key) {
         case "w":
@@ -44,4 +48,15 @@ function makeSound(key) {
         default:
             console.log(key);
     }
+}
+
+// function to add class .pressed to the pressed button
+function buttonAnimation(key) {
+    var pressedButton = document.querySelector("." + key);
+
+    pressedButton.classList.add("pressed");
+
+    setTimeout(() => {
+        pressedButton.classList.remove("pressed");
+    }, 100);
 }
